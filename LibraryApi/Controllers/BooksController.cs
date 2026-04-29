@@ -1,6 +1,7 @@
 ﻿using LibraryApi.Data;
 using LibraryApi.DTOs;
 using LibraryApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace LibraryApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize] //Bu controllerdaki tüm endpointler token isteyecektir
     [ApiController]
     public class BooksController : ControllerBase
     {

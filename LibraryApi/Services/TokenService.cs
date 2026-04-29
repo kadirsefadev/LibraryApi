@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Claim = System.Security.Claims.Claim;
+using System.Security.Cryptography;
 
 
 namespace LibraryApi.Services
@@ -49,9 +50,13 @@ namespace LibraryApi.Services
             //string çevir
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
             return (tokenString, expiresAt);
-
-
-
+          }
+        public string GenerateRefreshToken()
+        {
+            var randomBytes = RandomNumberGenerator.GetBytes(64);
+            return Convert.ToBase64String(randomBytes);
+            //Bu rastgele 64 byte üretip Base64 stringe çeviriyor. Refresh tokenlar genellikle uzun ve tahmin edilemez stringlerdir.
+            //Bu şekilde güvenli bir refresh token oluruz.
         }
         }
 }
